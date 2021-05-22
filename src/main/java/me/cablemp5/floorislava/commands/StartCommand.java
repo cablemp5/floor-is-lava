@@ -20,8 +20,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.*;
 import java.util.regex.Pattern;
 
-//Pull Request Test Using Test Branch
-
 public class StartCommand implements TabExecutor {
 
     private final Pattern numPattern = Pattern.compile("\\d+");
