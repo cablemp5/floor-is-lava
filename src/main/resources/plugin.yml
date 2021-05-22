@@ -1,0 +1,15 @@
+name: FloorIsLava
+version: ${project.version}
+main: me.cablemp5.floorislava.Main
+api-version: 1.16
+authors: [ cablemp5 ]
+description: A mingame plugin that makes lava rise within a barrier
+commands:
+  floorislava:
+    description: A fun floor is lava minigame plugin for Minecraft
+    usage: /floorislava <start,end,get,set,reset>
+    aliases:
+      - fl
+
+
+
