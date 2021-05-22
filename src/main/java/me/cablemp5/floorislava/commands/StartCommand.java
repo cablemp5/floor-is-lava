@@ -2,10 +2,9 @@ package me.cablemp5.floorislava.commands;
 
 import me.cablemp5.floorislava.Main;
 import me.cablemp5.floorislava.utils.RandomLocationUtil;
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.hover.content.Text;
@@ -14,8 +13,6 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -23,11 +20,13 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.*;
 import java.util.regex.Pattern;
 
+//This is a test to see if Git works
+
 public class StartCommand implements TabExecutor {
 
     private final Pattern numPattern = Pattern.compile("\\d+");
-    private static final Set<Material> LIQUID_MATERIALS = new HashSet<>(Arrays.asList(Material.LAVA,Material.WATER,Material.SEAGRASS,Material.KELP,Material.TALL_SEAGRASS));
-    private final Set<String> OVERLAY_OPTIONS = new HashSet<>(Arrays.asList("none","basic","advanced"));
+    private static final Set<Material> LIQUID_MATERIALS = new HashSet<>(Arrays.asList(Material.LAVA, Material.WATER, Material.SEAGRASS, Material.KELP, Material.TALL_SEAGRASS));
+    private final Set<String> OVERLAY_OPTIONS = new HashSet<>(Arrays.asList("none", "basic", "advanced"));
 
     private List<Player> playersAlive = new ArrayList<>();
     private double borderSize = 100;
