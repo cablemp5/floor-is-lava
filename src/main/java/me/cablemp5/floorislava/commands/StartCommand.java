@@ -24,6 +24,7 @@ public class StartCommand implements TabExecutor {
     private final Pattern numPattern = Pattern.compile("\\d+");
     private static final Set<Material> LIQUID_MATERIALS = new HashSet<>(Arrays.asList(Material.LAVA, Material.WATER, Material.SEAGRASS, Material.KELP, Material.TALL_SEAGRASS));
     private final Set<String> OVERLAY_OPTIONS = new HashSet<>(Arrays.asList("none", "basic", "advanced"));
+    private final String INSUFFICIENT_ARGS = Main.PLUGIN_NAME + ChatColor.RED + "Insufficient or unknown arguments. Try " + ChatColor.AQUA + "/floorislava help" + ChatColor.RED + " for a list of commands";
 
     private List<Player> playersAlive = new ArrayList<>();
     private double borderSize = 100;
@@ -84,7 +85,7 @@ public class StartCommand implements TabExecutor {
                             help(); break;
                         }
                         default: {
-                            player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "Insufficient or unknown arguments. Try " + ChatColor.AQUA + "/floorislava help" + ChatColor.RED + " for a list of commands");
+                            player.sendMessage(INSUFFICIENT_ARGS);
                             break;
                         }
                     }
@@ -114,13 +115,13 @@ public class StartCommand implements TabExecutor {
                                 break;
                             }
                             default: {
-                                player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "Insufficient or unknown arguments. Try " + ChatColor.AQUA + "/floorislava help" + ChatColor.RED + " for a list of commands");}
+                                player.sendMessage(INSUFFICIENT_ARGS);}
                         }
                     } else if (args[0].equals("start") && args[1].equals("singleplayer")) {
                         playersToStart = 1;
                         startGame();
                     } else {
-                        player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "Insufficient or unknown arguments. Try " + ChatColor.AQUA + "/floorislava help" + ChatColor.RED + " for a list of commands");
+                        player.sendMessage(INSUFFICIENT_ARGS);
                     }
                     break;
                 }
@@ -179,12 +180,12 @@ public class StartCommand implements TabExecutor {
                                 break;
                             }
                             default: {
-                                player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "Insufficient or unknown arguments. Try " + ChatColor.AQUA + "/floorislava help" + ChatColor.RED + " for a list of commands");
+                                player.sendMessage(INSUFFICIENT_ARGS);
                                 break;
                             }
                         }
                     } else {
-                        player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "Insufficient or unknown arguments. Try " + ChatColor.AQUA + "/floorislava help" + ChatColor.RED + " for a list of commands");
+                        player.sendMessage(INSUFFICIENT_ARGS);
                     }
                     break;
                 }
