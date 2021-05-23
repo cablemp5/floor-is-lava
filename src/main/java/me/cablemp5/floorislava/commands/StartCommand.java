@@ -14,7 +14,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
@@ -72,23 +71,50 @@ public class StartCommand implements TabExecutor {
                 }
                 case 1: {
                     switch (args[0]) {
-                        case "start": { playersToStart = 2; startGame(); break; }
-                        case "end": { endGame(); break; }
-                        case "reset": { reset(); break; }
-                        case "help": {help(); break;}
-                        default: { player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "Insufficient or unknown arguments. Try " + ChatColor.AQUA + "/floorislava help" + ChatColor.RED + " for a list of commands"); break; }
+                        case "start": {
+                            playersToStart = 2; startGame(); break;
+                        }
+                        case "end": {
+                            endGame(); break;
+                        }
+                        case "reset": {
+                            reset(); break;
+                        }
+                        case "help": {
+                            help(); break;
+                        }
+                        default: {
+                            player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "Insufficient or unknown arguments. Try " + ChatColor.AQUA + "/floorislava help" + ChatColor.RED + " for a list of commands");
+                            break;
+                        }
                     }
                     break;
                 }
                 case 2: {
                     if (args[0].equals("get")) {
                         switch (args[1]) {
-                            case "bordersize": { player.sendMessage(Main.PLUGIN_NAME + "bordersize is " + ChatColor.AQUA + borderSize); break;}
-                            case "delay": { player.sendMessage(Main.PLUGIN_NAME + "delay is " + ChatColor.AQUA + risePeriod); break;}
-                            case "startheight": { player.sendMessage(Main.PLUGIN_NAME + "startheight is " + ChatColor.AQUA + initHeight); break; }
-                            case "overlay": { player.sendMessage(Main.PLUGIN_NAME + "overlay is " + ChatColor.AQUA + overlayString); break; }
-                            case "risingblock": { player.sendMessage(Main.PLUGIN_NAME + "risingblock is " + ChatColor.AQUA + (riseBlock.equals(Material.LAVA) ? "lava":"void")); break; }
-                            default: { player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "Insufficient or unknown arguments. Try " + ChatColor.AQUA + "/floorislava help" + ChatColor.RED + " for a list of commands");}
+                            case "bordersize": {
+                                player.sendMessage(Main.PLUGIN_NAME + " is " + ChatColor.AQUA + borderSize);
+                                break;
+                            }
+                            case "delay": {
+                                player.sendMessage(Main.PLUGIN_NAME + "delay is " + ChatColor.AQUA + risePeriod);
+                                break;
+                            }
+                            case "startheight": {
+                                player.sendMessage(Main.PLUGIN_NAME + "startheight is " + ChatColor.AQUA + initHeight);
+                                break;
+                            }
+                            case "overlay": {
+                                player.sendMessage(Main.PLUGIN_NAME + "overlay is " + ChatColor.AQUA + overlayString);
+                                break;
+                            }
+                            case "risingblock": {
+                                player.sendMessage(Main.PLUGIN_NAME + "risingblock is " + ChatColor.AQUA + (riseBlock.equals(Material.LAVA) ? "lava":"void"));
+                                break;
+                            }
+                            default: {
+                                player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "Insufficient or unknown arguments. Try " + ChatColor.AQUA + "/floorislava help" + ChatColor.RED + " for a list of commands");}
                         }
                     } else if (args[0].equals("start") && args[1].equals("singleplayer")) {
                         playersToStart = 1;
@@ -102,65 +128,53 @@ public class StartCommand implements TabExecutor {
                     if (args[0].equals("set")) {
                         switch (args[1]) {
                             case "risingblock": {
-                                if (args[2].equalsIgnoreCase("lava")) {
-                                    riseBlock = Material.LAVA;
-                                    player.sendMessage(Main.PLUGIN_NAME + "Set risingblock to " + ChatColor.AQUA + "lava");
-                                } else if (args[2].equalsIgnoreCase("void")) {
-                                    riseBlock = Material.AIR;
-                                    initHeight = 0;
-                                    player.sendMessage(Main.PLUGIN_NAME + "Set risingblock to " + ChatColor.AQUA + "void" + ChatColor.RESET + " and the starting height to " + ChatColor.AQUA + "0");
+                                if (args[2].equals("lava") || args[2].equals("void")) {
+                                    riseBlock = (args[2].equals("lava") ? Material.LAVA : Material.AIR);
+                                    player.sendMessage(Main.PLUGIN_NAME + "Set risingblock to " + (args[2].equals("lava") ? "lava" : "void"));
                                 } else {
                                     player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "risingblock can only be void or lava");
                                 }
                                 break;
                             }
                             case "bordersize": {
-                                if (numPattern.matcher(args[2]).matches()) {
-                                    if (Integer.parseInt(args[2]) < 0) {
-                                        player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "bordersize must be greater than 0");
-                                    } else if (Integer.parseInt(args[2])%2 != 0) {
+                                if (numPattern.matcher(args[2]).matches() && Integer.parseInt(args[2]) > 0) {
+                                    int size = Integer.parseInt(args[2]);
+                                    if (size%2 != 0) {
                                         player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "bordersize must be an even number");
-                                    }
-                                    else {
-                                        borderSize = Integer.parseInt(args[2]);
+                                    } else {
+                                        borderSize = size;
                                         player.sendMessage(Main.PLUGIN_NAME + "Set worldBorder size to " + ChatColor.AQUA + borderSize);
                                         if (borderSize >= 150) {
                                             player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "A bordersize greater than 150 may cause lag!");
                                         }
                                     }
                                 } else {
-                                    player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "Input an integer for bordersize");
+                                    player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "Input an integer greater than 0 for bordersize");
                                 }
                                 break;
                             }
                             case "delay": {
-                                if (numPattern.matcher(args[2]).matches()) {
-                                    if (Integer.parseInt(args[2]) < 1) {
-                                        player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "delay must be greater than or equal to 1");
-                                    } else {
-                                        risePeriod = Integer.parseInt(args[2]);
-                                        player.sendMessage(Main.PLUGIN_NAME + "Set delay to " + ChatColor.AQUA + risePeriod + " seconds");
-                                    }
+                                if (numPattern.matcher(args[2]).matches() && Integer.parseInt(args[2]) < 1) {
+                                    risePeriod = Integer.parseInt(args[2]);
+                                    player.sendMessage(Main.PLUGIN_NAME + "Set delay to " + ChatColor.AQUA + risePeriod + " seconds");
                                 } else {
-                                    player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "Input an integer for delay");
+                                    player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "Input an integer greater or equal to 1 for delay");
                                 }
                                 break;
                             }
                             case "startheight": {
-                                if (numPattern.matcher(args[2]).matches()) {
-                                    if (Integer.parseInt(args[2]) < 0 || Integer.parseInt(args[2]) > 100) {
-                                        player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "startheight must be greater than 0 and less than 100");
-                                    } else {
-                                        initHeight = Integer.parseInt(args[2]);
-                                        player.sendMessage(Main.PLUGIN_NAME + "Set startheight to " + ChatColor.AQUA + initHeight);
-                                    }
+                                if (numPattern.matcher(args[2]).matches() && (Integer.parseInt(args[2]) > 0 && Integer.parseInt(args[2]) < 256)) {
+                                    initHeight = Integer.parseInt(args[2]);
+                                    player.sendMessage(Main.PLUGIN_NAME + "Set startheight to " + ChatColor.AQUA + initHeight);
                                 } else {
-                                    player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "Input an integer for starting height");
+                                    player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "Input an integer greater than 0 and less than 256 for starting height");
                                 }
                                 break;
                             }
                             case "overlay": {
-                                if (OVERLAY_OPTIONS.contains(args[2])) { overlayString = args[2]; }
+                                if (OVERLAY_OPTIONS.contains(args[2])) {
+                                    overlayString = args[2];
+                                }
                                 player.sendMessage(Main.PLUGIN_NAME + (OVERLAY_OPTIONS.contains(args[2]) ? Main.PLUGIN_NAME + "Set overlay to " + ChatColor.AQUA + overlayString : Main.PLUGIN_NAME + ChatColor.RED + "overlay must be none, basic, or advanced"));
                                 break;
                             }
@@ -190,7 +204,7 @@ public class StartCommand implements TabExecutor {
                 if (args[0].equals("set") || args[0].equals("get")) {
                     return Arrays.asList("bordersize", "delay", "startheight", "overlay","risingblock");
                 } else if (args[0].equals("start")) {
-                    return Arrays.asList("singleplayer");
+                    return Collections.singletonList("singleplayer");
                 }
             }
             case 3: {
@@ -238,7 +252,7 @@ public class StartCommand implements TabExecutor {
                 p.sendMessage(Main.PLUGIN_NAME + ChatColor.GREEN + "Game started!");
             }
 
-            startLavaRiseLoop();
+            startGameLoop();
 
         } else if (!gameInProgress) {
             player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "You need at least " + playersToStart + " players on the server to start the game");
@@ -268,7 +282,6 @@ public class StartCommand implements TabExecutor {
             world.setMonsterSpawnLimit(initSpawnLimit);
             world.getWorldBorder().setCenter(new Location(world,0,0,0));
             world.getWorldBorder().setSize(30000000);
-            world.setDifficulty(Difficulty.EASY);
             new Location(world,world.getSpawnLocation().getX(),world.getSpawnLocation().getY()-1,world.getSpawnLocation().getZ()).getBlock().setType(Material.BARRIER);
 
         } else {
@@ -292,7 +305,6 @@ public class StartCommand implements TabExecutor {
         gameInProgress = false;
 
         World world = Bukkit.getServer().getWorlds().get(0);
-
         world.getWorldBorder().setCenter(new Location(world,0,0,0));
         world.getWorldBorder().setSize(30000000);
 
@@ -306,9 +318,8 @@ public class StartCommand implements TabExecutor {
 
     }
 
-    public void startLavaRiseLoop() {
+    public void startGameLoop() {
 
-        Plugin plugin = main;
         displayHeight = initHeight;
 
         new BukkitRunnable() {
@@ -336,16 +347,17 @@ public class StartCommand implements TabExecutor {
                         }
 
                         for (Player p : players) {
+                            String yLevelIndicator = block.equals(Material.LAVA) ? "LAVA Y-LEVEL: " + ChatColor.RED : "VOID Y-LEVEL: " + ChatColor.DARK_PURPLE;
                             if (overlayString.equals("basic")) {
-                                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.BOLD + (block.equals(Material.LAVA) ? "LAVA Y-LEVEL: " + ChatColor.RED : "VOID Y-LEVEL: " + ChatColor.DARK_PURPLE) + "" + ChatColor.BOLD + displayHeight + "↑"));
+                                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.BOLD + yLevelIndicator + "" + ChatColor.BOLD + displayHeight + "↑"));
                             } else if (overlayString.equals("advanced")) {
-                                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent((ChatColor.BOLD + (block.equals(Material.LAVA) ? "LAVA Y-LEVEL: " + ChatColor.RED : "VOID Y-LEVEL: " + ChatColor.DARK_PURPLE) + "" + ChatColor.BOLD + displayHeight + "↑" + ChatColor.RESET + "" + ChatColor.GRAY + " | " + ChatColor.RESET + "" + ChatColor.BOLD + "HIGHEST : " + ChatColor.AQUA + "" + ChatColor.BOLD + highest.getName() + ChatColor.RESET + "" + ChatColor.GRAY + " | " + ChatColor.RESET + "" + ChatColor.BOLD +  "LOWEST : " + ChatColor.GOLD + "" + ChatColor.BOLD + lowest.getName())));
+                                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent((ChatColor.BOLD + yLevelIndicator + "" + ChatColor.BOLD + displayHeight + "↑" + ChatColor.RESET + "" + ChatColor.GRAY + " | " + ChatColor.RESET + "" + ChatColor.BOLD + "HIGHEST: " + ChatColor.AQUA + "" + ChatColor.BOLD + highest.getName() + ChatColor.RESET + "" + ChatColor.GRAY + " | " + ChatColor.RESET + "" + ChatColor.BOLD +  "LOWEST: " + ChatColor.GOLD + "" + ChatColor.BOLD + lowest.getName())));
                             }
                         }
                     }
                 }
             }
-        }.runTaskTimer(plugin,60L,10L);
+        }.runTaskTimer(main,60L,10L);
 
         new BukkitRunnable() {
 
@@ -383,12 +395,11 @@ public class StartCommand implements TabExecutor {
                                     loc.getBlock().setType(Material.BARRIER);
                                 }
                             }
-
                         }
                         currentHeight++;
                     }
                 }
             }
-        }.runTaskTimer(plugin,60L,(long)risePeriod*20);
+        }.runTaskTimer(main,60L,(long)risePeriod*20);
     }
 }
