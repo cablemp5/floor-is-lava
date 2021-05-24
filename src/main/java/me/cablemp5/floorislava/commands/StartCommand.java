@@ -129,9 +129,13 @@ public class StartCommand implements TabExecutor {
                     if (args[0].equals("set")) {
                         switch (args[1]) {
                             case "risingblock": {
-                                if (args[2].equals("lava") || args[2].equals("void")) {
-                                    riseBlock = (args[2].equals("lava") ? Material.LAVA : Material.AIR);
-                                    player.sendMessage(Main.PLUGIN_NAME + "Set risingblock to " + (args[2].equals("lava") ? "lava" : "void"));
+                                if (args[2].equals("lava")) {
+                                    riseBlock = Material.LAVA;
+                                    player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "Set risingBlock to lava");
+                                } else if (args[2].equals("void")) {
+                                    riseBlock = Material.AIR;
+                                    initHeight = 0;
+                                    player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "Set risingBlock to " + ChatColor.AQUA + "void" + ChatColor.RESET +" and startheight to " + ChatColor.AQUA + "0");
                                 } else {
                                     player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "risingblock can only be void or lava");
                                 }
@@ -164,11 +168,11 @@ public class StartCommand implements TabExecutor {
                                 break;
                             }
                             case "startheight": {
-                                if (numPattern.matcher(args[2]).matches() && (Integer.parseInt(args[2]) > 0 && Integer.parseInt(args[2]) < 256)) {
+                                if (numPattern.matcher(args[2]).matches() && (Integer.parseInt(args[2]) >= 0 && Integer.parseInt(args[2]) < 256)) {
                                     initHeight = Integer.parseInt(args[2]);
                                     player.sendMessage(Main.PLUGIN_NAME + "Set startheight to " + ChatColor.AQUA + initHeight);
                                 } else {
-                                    player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "Input an integer greater than 0 and less than 256 for starting height");
+                                    player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "Input an integer greater or equal to 0 and less than 256 for starting height");
                                 }
                                 break;
                             }
