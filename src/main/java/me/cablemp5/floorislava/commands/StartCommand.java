@@ -95,7 +95,7 @@ public class StartCommand implements TabExecutor {
                     if (args[0].equals("get")) {
                         switch (args[1]) {
                             case "bordersize": {
-                                player.sendMessage(Main.PLUGIN_NAME + " is " + ChatColor.AQUA + borderSize);
+                                player.sendMessage(Main.PLUGIN_NAME + "bordersize is " + ChatColor.AQUA + borderSize);
                                 break;
                             }
                             case "delay": {
@@ -297,11 +297,11 @@ public class StartCommand implements TabExecutor {
     public void help() {
         player.sendMessage(Main.PLUGIN_NAME + "FloorIsLava Commands");
         player.sendMessage("-------------------------------------");
-        player.sendMessage(ChatColor.GOLD + "/floorislava start" + ChatColor.GRAY +  " | Starts the game");
-        player.sendMessage(ChatColor.GOLD + "/floorislava end" + ChatColor.GRAY + " | Ends the game");
-        player.sendMessage(ChatColor.GOLD + "/floorislava set <setting> <value>" + ChatColor.GRAY + " | Sets a game setting");
-        player.sendMessage(ChatColor.GOLD + "/floorislava get <setting>" + ChatColor.GRAY + " | Gets a game setting");
-        player.sendMessage(ChatColor.GOLD + "/floorislava reset" + ChatColor.GRAY + " | Resets game settings");
+        player.sendMessage(ChatColor.GOLD + "/floorislava start" + ChatColor.RESET +  " | Starts the game");
+        player.sendMessage(ChatColor.GOLD + "/floorislava end" + ChatColor.RESET + " | Ends the game");
+        player.sendMessage(ChatColor.GOLD + "/floorislava set <setting> <value>" + ChatColor.RESET + " | Sets a game setting");
+        player.sendMessage(ChatColor.GOLD + "/floorislava get <setting>" + ChatColor.RESET + " | Gets a game setting");
+        player.sendMessage(ChatColor.GOLD + "/floorislava reset" + ChatColor.RESET + " | Resets game settings");
         player.sendMessage("-------------------------------------");
     }
 
