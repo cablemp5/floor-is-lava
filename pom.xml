@@ -6,7 +6,7 @@
 
     <groupId>me.cablemp5</groupId>
     <artifactId>floorIsLava</artifactId>
-    <version>1.0.0</version>
+    <version>1.2.1</version>
     <packaging>jar</packaging>
 
     <name>FloorIsLava</name>
