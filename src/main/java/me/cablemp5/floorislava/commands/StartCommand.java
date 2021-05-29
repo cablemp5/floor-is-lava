@@ -260,7 +260,7 @@ public class StartCommand implements TabExecutor {
 
             gameInProgress = true;
             World world = Bukkit.getServer().getWorlds().get(0);
-            startPosition = (startAtPos ? player.getLocation() : RandomLocationUtil.generateRandomLocation(world));
+            startPosition = (startAtPos ? new Location(world,player.getLocation().getX(),world.getHighestBlockYAt((int)player.getLocation().getX(),(int)player.getLocation().getZ()),player.getLocation().getBlockZ()) : RandomLocationUtil.generateRandomLocation(world));
 
             initSpawnLimit = world.getMonsterSpawnLimit();
             world.setMonsterSpawnLimit((int)(Math.pow(borderSize,2)/512));
