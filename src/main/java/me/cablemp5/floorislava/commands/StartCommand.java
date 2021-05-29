@@ -34,10 +34,11 @@ public class StartCommand implements TabExecutor {
     private String overlayString = "basic";
     private int displayHeight;
     private boolean gameInProgress = false;
+    private boolean startAtPos = false;
     private int playersToStart = 2;
     private int initSpawnLimit;
 
-    private Location randPosition;
+    private Location startPosition;
     private Player player;
 
     private final Main main;
@@ -73,7 +74,7 @@ public class StartCommand implements TabExecutor {
                 case 1: {
                     switch (args[0]) {
                         case "start": {
-                            playersToStart = 2; startGame(); break;
+                            playersToStart = 2; startAtPos = false; startGame(); break;
                         }
                         case "end": {
                             endGame(); break;
@@ -117,9 +118,13 @@ public class StartCommand implements TabExecutor {
                             default: {
                                 player.sendMessage(INSUFFICIENT_ARGS);}
                         }
-                    } else if (args[0].equals("start") && args[1].equals("singleplayer")) {
-                        playersToStart = 1;
-                        startGame();
+                    } else if (args[0].equals("start")) {
+                        if (args[1].equals("singleplayer") || args[1].equals("multiplayer")) {
+                            playersToStart = args[1].equals("singleplayer") ? 1 : 2;
+                            startGame();
+                        } else {
+                            player.sendMessage(INSUFFICIENT_ARGS);
+                        }
                     } else {
                         player.sendMessage(INSUFFICIENT_ARGS);
                     }
@@ -188,6 +193,19 @@ public class StartCommand implements TabExecutor {
                                 break;
                             }
                         }
+                    } else if (args[0].equals("start")) {
+                        if (args[1].equals("singleplayer") || args[1].equals("multiplayer")) {
+                            playersToStart = args[1].equals("singleplayer") ? 1 : 2;
+                            if ((args[2].equals("randomlocation") || args[2].equals("currentlocation"))) {
+                                startAtPos = args[2].equals("currentlocation");
+                                startGame();
+                            } else {
+                                player.sendMessage(INSUFFICIENT_ARGS);
+                            }
+                            startGame();
+                        } else {
+                            player.sendMessage(INSUFFICIENT_ARGS);
+                        }
                     } else {
                         player.sendMessage(INSUFFICIENT_ARGS);
                     }
@@ -209,7 +227,7 @@ public class StartCommand implements TabExecutor {
                 if (args[0].equals("set") || args[0].equals("get")) {
                     return Arrays.asList("bordersize", "delay", "startheight", "overlay","risingblock");
                 } else if (args[0].equals("start")) {
-                    return Collections.singletonList("singleplayer");
+                    return Arrays.asList("singleplayer","multiplayer");
                 }
             }
             case 3: {
@@ -226,6 +244,8 @@ public class StartCommand implements TabExecutor {
                         case "risingblock":
                             return Arrays.asList("lava","void");
                     }
+                } else if (args[0].equals("start")) {
+                    return Arrays.asList("currentlocation","randomlocation");
                 }
             }
         }
@@ -240,16 +260,16 @@ public class StartCommand implements TabExecutor {
 
             gameInProgress = true;
             World world = Bukkit.getServer().getWorlds().get(0);
-            randPosition = RandomLocationUtil.generateRandomLocation(world);
+            startPosition = (startAtPos ? player.getLocation() : RandomLocationUtil.generateRandomLocation(world));
 
             initSpawnLimit = world.getMonsterSpawnLimit();
             world.setMonsterSpawnLimit((int)(Math.pow(borderSize,2)/512));
-            world.setSpawnLocation(randPosition);
-            world.getWorldBorder().setCenter(randPosition);
+            world.setSpawnLocation(startPosition);
+            world.getWorldBorder().setCenter(startPosition);
             world.getWorldBorder().setSize(borderSize);
 
             for (Player p: playersAlive) {
-                p.teleport(randPosition);
+                p.teleport(startPosition);
                 p.setGameMode(GameMode.SURVIVAL);
                 p.setHealth(Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getBaseValue());
                 p.setFoodLevel(20);
@@ -318,6 +338,7 @@ public class StartCommand implements TabExecutor {
         risePeriod = 10;
         riseBlock = Material.LAVA;
         overlayString = "basic";
+        startAtPos = false;
 
         player.sendMessage(Main.PLUGIN_NAME + "All settings reverted to default");
 
@@ -366,7 +387,7 @@ public class StartCommand implements TabExecutor {
 
         new BukkitRunnable() {
 
-            final Location location = randPosition;
+            final Location location = startPosition;
             final double radius = borderSize/2;
             int currentHeight = initHeight;
             final Material block = riseBlock;
