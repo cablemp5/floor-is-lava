@@ -136,11 +136,11 @@ public class StartCommand implements TabExecutor {
                             case "risingblock": {
                                 if (args[2].equals("lava")) {
                                     riseBlock = Material.LAVA;
-                                    player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "Set risingBlock to lava");
+                                    player.sendMessage(Main.PLUGIN_NAME + "Set risingBlock to " + ChatColor.AQUA + "lava");
                                 } else if (args[2].equals("void")) {
                                     riseBlock = Material.AIR;
                                     initHeight = 0;
-                                    player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "Set risingBlock to " + ChatColor.AQUA + "void" + ChatColor.RESET +" and startheight to " + ChatColor.AQUA + "0");
+                                    player.sendMessage(Main.PLUGIN_NAME + "Set risingBlock to " + ChatColor.AQUA + "void" + ChatColor.RESET +" and startheight to " + ChatColor.AQUA + "0");
                                 } else {
                                     player.sendMessage(Main.PLUGIN_NAME + ChatColor.RED + "risingblock can only be void or lava");
                                 }
@@ -164,7 +164,7 @@ public class StartCommand implements TabExecutor {
                                 break;
                             }
                             case "delay": {
-                                if (numPattern.matcher(args[2]).matches() && Integer.parseInt(args[2]) < 1) {
+                                if (numPattern.matcher(args[2]).matches() && Integer.parseInt(args[2]) >= 1) {
                                     risePeriod = Integer.parseInt(args[2]);
                                     player.sendMessage(Main.PLUGIN_NAME + "Set delay to " + ChatColor.AQUA + risePeriod + " seconds");
                                 } else {
@@ -196,13 +196,12 @@ public class StartCommand implements TabExecutor {
                     } else if (args[0].equals("start")) {
                         if (args[1].equals("singleplayer") || args[1].equals("multiplayer")) {
                             playersToStart = args[1].equals("singleplayer") ? 1 : 2;
-                            if ((args[2].equals("randomlocation") || args[2].equals("currentlocation"))) {
-                                startAtPos = args[2].equals("currentlocation");
+                            if ((args[2].equals("randompos") || args[2].equals("currentpos"))) {
+                                startAtPos = args[2].equals("currentpos");
                                 startGame();
                             } else {
                                 player.sendMessage(INSUFFICIENT_ARGS);
                             }
-                            startGame();
                         } else {
                             player.sendMessage(INSUFFICIENT_ARGS);
                         }
@@ -245,7 +244,7 @@ public class StartCommand implements TabExecutor {
                             return Arrays.asList("lava","void");
                     }
                 } else if (args[0].equals("start")) {
-                    return Arrays.asList("currentlocation","randomlocation");
+                    return Arrays.asList("currentpos","randompos");
                 }
             }
         }
@@ -260,7 +259,7 @@ public class StartCommand implements TabExecutor {
 
             gameInProgress = true;
             World world = Bukkit.getServer().getWorlds().get(0);
-            startPosition = (startAtPos ? new Location(world,player.getLocation().getX(),world.getHighestBlockYAt((int)player.getLocation().getX(),(int)player.getLocation().getZ()),player.getLocation().getBlockZ()) : RandomLocationUtil.generateRandomLocation(world));
+            startPosition = (startAtPos ? new Location(world,player.getLocation().getX(),world.getHighestBlockYAt((int)player.getLocation().getX(),(int)player.getLocation().getZ())+1,player.getLocation().getBlockZ()) : RandomLocationUtil.generateRandomLocation(world));
 
             initSpawnLimit = world.getMonsterSpawnLimit();
             world.setMonsterSpawnLimit((int)(Math.pow(borderSize,2)/512));
@@ -269,7 +268,7 @@ public class StartCommand implements TabExecutor {
             world.getWorldBorder().setSize(borderSize);
 
             for (Player p: playersAlive) {
-                p.teleport(startPosition);
+                p.teleport(startPosition.add(0.5,0,0.5));
                 p.setGameMode(GameMode.SURVIVAL);
                 p.setHealth(Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getBaseValue());
                 p.setFoodLevel(20);
