@@ -7,12 +7,10 @@
   <a href="https://github.com/cablemp5/floor-is-lava">
     <img src="https://img.shields.io/badge/java-jdk8-red" alt="Java">
   </a>
-  <a href="https://github.com/cablemp5/floor-is-lava">
+  <a href="https://www.spigotmc.org/resources/floor-is-lava.92533/">
     <img src="https://img.shields.io/spiget/downloads/92533" alt="Downloads">
   </a>
 <p/>
-
-
 
 <p align="center">
   <a href="https://github.com/cablemp5/floor-is-lava">
@@ -21,7 +19,7 @@
   <a href="https://github.com/cablemp5/floor-is-lava">
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen" alt="Pull Requests">
   </a>
-  <a href="https://github.com/cablemp5/floor-is-lava">
+  <a href="https://www.spigotmc.org/resources/floor-is-lava.92533/">
     <img src="https://img.shields.io/spiget/rating/92533" alt="Downloads">
   </a>
 <p/>
@@ -39,8 +37,6 @@
   •
   <a href="#license">License</a>
 </p>
-
-
 
 ![image](https://i.imgur.com/8tqltty.png)
 
