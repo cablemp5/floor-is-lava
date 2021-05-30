@@ -1,49 +1,95 @@
-# ![image](https://user-images.githubusercontent.com/67910697/118985265-4e76e580-b94c-11eb-96c9-ab9e1981d057.png) FloorIsLava 
+![transparentLavaBanner](https://user-images.githubusercontent.com/67910697/120094578-1c554880-c0ef-11eb-80a9-721d0bc6a9be.png)
+
+<p align="center">
+  <a href="https://github.com/cablemp5/floor-is-lava">
+    <img src="https://img.shields.io/github/languages/code-size/cablemp5/floor-is-lava" alt="Github Repo">
+  </a>
+  <a href="https://github.com/cablemp5/floor-is-lava">
+    <img src="https://img.shields.io/badge/java-jdk8-red" alt="Java">
+  </a>
+  <a href="https://github.com/cablemp5/floor-is-lava">
+    <img src="https://img.shields.io/spiget/downloads/92533" alt="Downloads">
+  </a>
+<p/>
+
+
+
+<p align="center">
+  <a href="https://github.com/cablemp5/floor-is-lava">
+    <img src="https://img.shields.io/github/license/cablemp5/floor-is-lava" alt="License">
+  </a>
+  <a href="https://github.com/cablemp5/floor-is-lava">
+    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen" alt="Pull Requests">
+  </a>
+  <a href="https://github.com/cablemp5/floor-is-lava">
+    <img src="https://img.shields.io/spiget/rating/92533" alt="Downloads">
+  </a>
+<p/>
+
+<p align="center">
+  <a href="#overview">Overview</a>
+  •
+  <a href="#download-and-installation">Download and Installation</a>
+  •
+  <a href="#usage">Usage</a>
+  •
+  <a href="#technologies">Technologies</a>
+  •
+  <a href="#bugs-and-support">Bugs and Support</a>
+  •
+  <a href="#license">License</a>
+</p>
+
+
 
 ![image](https://i.imgur.com/8tqltty.png)
 
-### About
+# Overview
 
-This is a plugin that allows you to play the FloorIsLava minigame seen in popular Minecraft YouTube videos! By changing the risingBlock setting in the settings, you can also have the void rise.
+floorIsLava is a simple Spigot plugin that allows you to play the floor is lava minigame seen in popular Minecraft videos! Lava will slowly rise from the floor, burning everything in its path! The last player standing wins! This plugin is extremely customizable, and allows you to change almost every setting in game. You can even make the void rise. [**Installing this plugin**](#download-and-installation) is as simple as placing the FloorIsLava.jar file in your plugins folder.
 
-### Download
+**Customizable settings:**
+- The time between each rise
+- The world border size
+- The block that rises
+- The starting height
 
-You can download the plugin on it's Spigot page, [here](https://www.spigotmc.org/resources/floorislava.92533/). Once you are on that page, click on the "Download Now" button in the top right.
 
-### Requirements
+# Download and Installation
 
-FloorIsLava is compatible with Spigot and Paper Servers (Paper recommended)
-FloorIsLava may function with other servers, but you might run into compatibility issues
+You can download the plugin on it's Spigot page, [here](https://www.spigotmc.org/resources/floorislava.92533/). Once you've navigated to the page, click the "Download Now" button in the top right. After that, just place the FloorIsLava.jar in your plugins folder and restart your server! *This plugin was made for Spigot and Paper servers, and may not function as intended on others.*
 
-### Commands
 
+# Usage
+
+```java
+// Start the game
+/floorislava start
+
+// End the game
+/floorislava end
+
+// Get a setting
+/floorislava get <setting>
+
+// Set a setting
+/floorislava set <setting> <value>
+
+// Reset all settings to their defaults
+/floorislava reset
 ```
-- /floorislava start
-- /floorislava end
-- /floorislava get <setting>
-- /floorislava set <setting> <value>
-- /floorislava reset
-```
 
-### Installation
-  
-1. Place the FloorIsLava.jar file in the plugins folder of your Paper or Spigot server
-2. Restart or reload the server
+# Technologies
 
-### Inspiration
-![image](https://user-images.githubusercontent.com/67910697/118984658-ba0c8300-b94b-11eb-9a3f-b9dd23c19821.png) ![image](https://user-images.githubusercontent.com/67910697/118984676-bf69cd80-b94b-11eb-89c4-72fc2171a13a.png)
+This software uses the following API's and libraries:
 
-> (via TommyInnit and WilburSoot on YouTube)
+- [**Spigot**](https://www.spigotmc.org/)
 
-### Donate
+# Bugs and Support
 
-This plugin is completely free and open-source. If you had liked using this plugin, feel free to donate to my [PayPal](paypal.me/collinscaleb). If you can't donate, leaving a positive review and a star on GitHub would also help. I also make custom plugins for cheap, so if you want a custom plugin for a video or a server let me know. Thanks!
+If you encounter any bugs, or want to see a new feature, leaving an issue on the GitHub pages or messaging me on Discord is the fastest way to reach me. My discord user is `cablemp5#0027`
 
-### Bugs and Support
+# License
 
-If you encounter any bugs, or want to see a new feature, leaving an issue on the GitHub pages or messaging me on Discord is the fastest way to reach me. My discord user is cablemp5#0027.
-
-### License
-
-FloorIsLava is an open source project released under the [Apache License 2.0](LICENSE), and I welcome code contributions on GitHub.
+FloorIsLava is an open source project released under the [Apache License 2.0](LICENSE), and and contributions are more than welcome. It's also an Emailware, so feel free to email me at [cmikec12@gmail.com](cmikec12@gmail.com)
 
