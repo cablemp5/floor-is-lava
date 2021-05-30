@@ -46,7 +46,7 @@
 
 # Overview
 
-floorIsLava is a simple Spigot plugin that allows you to play the floor is lava minigame seen in popular Minecraft videos! Lava will slowly rise from the floor, burning everything in its path! The last player standing wins! This plugin is highly customizable, and allows you to change every setting in-game. [**To install this plugin**](#download-and-installation) download and place the FloorIsLava.jar file in your plugins folder!
+floorIsLava is a simple Spigot plugin that allows you to play the floor is lava minigame seen in popular Minecraft videos! Lava will slowly rise from the floor, burning everything in its path! The last player standing wins! This plugin is highly customizable, and allows you to change every setting in-game. To [**install this plugin**](#download-and-installation) download and place the FloorIsLava.jar file in your plugins folder!
 
 **Customizable settings:**
 - The delay between each rise
