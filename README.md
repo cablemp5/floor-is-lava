@@ -85,6 +85,7 @@ You can download the plugin on it's Spigot page, [here](https://www.spigotmc.org
 This software uses the following API's and libraries:
 
 - [**Spigot**](https://www.spigotmc.org/)
+  - Customized CraftBukkit Minecraft server API
 
 # Bugs and Support
 
