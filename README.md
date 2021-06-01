@@ -89,5 +89,5 @@ If you encounter any bugs, or want to see a new feature, leaving an issue on the
 
 # License
 
-FloorIsLava is an open source project released under the [Apache License 2.0](LICENSE), and and contributions are more than welcome. It's also an Emailware, so feel free to email me at [cmikec12@gmail.com](cmikec12@gmail.com)
+floorIsLava is an open source project released under the [Apache License 2.0](LICENSE), and and contributions are more than welcome. It's also an Emailware, so feel free to email me at [cmikec12@gmail.com](cmikec12@gmail.com)
 
