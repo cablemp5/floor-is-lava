@@ -51,6 +51,7 @@ floorIsLava is a simple Spigot plugin that allows you to play the floor is lava 
 - The starting height
 - The in-game overlay
 
+> Created by cablemp5 and mnul69
 
 # Download and Installation
 
